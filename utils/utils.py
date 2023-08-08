@@ -9,18 +9,23 @@ def load_data():
 
 def last_five_operations():
     operations = load_data()
+    executed_operations = is_executed(operations)
     all_times = []
-    for operation in operations:
-        if 'state' in operation and operation['state'] == 'EXECUTED':
-            all_times.append(operation['date'])
-        else:
-            operations.remove(operation)
+    for operation in executed_operations:
+        all_times.append(operation['date'])
     all_times.sort(reverse=True)
     last_five_times = all_times[:NUMBER_LAST_OPERATIONS]
     result = {}
-    for operation in operations:
+    for operation in executed_operations:
         if operation['date'] in last_five_times:
             result [last_five_times.index(operation['date'])] = operation
+    return result
+
+def is_executed(operations):
+    result = []
+    for operation in operations:
+        if 'state' in operation and operation['state'] == 'EXECUTED':
+            result.append(operation)
     return result
 
 def creat_message(operation):
