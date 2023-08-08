@@ -3,15 +3,15 @@ import json
 FILENAME = 'data/operations.json'
 NUMBER_LAST_OPERATIONS = 5
 
-def load_data():
+def load_data(filename):
     '''
     Load data from FILENAME
     :return: list with operations
     '''
-    with open(FILENAME, 'r', encoding='UTF-8') as file:
+    with open(filename, 'r', encoding='UTF-8') as file:
         return json.load(file)
 
-def last_five_operations():
+def last_five_operations(operations):
     '''
     Finding last five operations in all list of operations.
     First find inly executed operations.
@@ -19,7 +19,6 @@ def last_five_operations():
     And finaly, find operations with last five datatimes.
     :return: dictionary with five last operations
     '''
-    operations = load_data()
     executed_operations = is_executed(operations)
     all_times = []
     for operation in executed_operations:
