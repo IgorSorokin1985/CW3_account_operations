@@ -4,10 +4,21 @@ FILENAME = 'data/operations.json'
 NUMBER_LAST_OPERATIONS = 5
 
 def load_data():
+    '''
+    Load data from FILENAME
+    :return: list with operations
+    '''
     with open(FILENAME, 'r', encoding='UTF-8') as file:
         return json.load(file)
 
 def last_five_operations():
+    '''
+    Finding last five operations in all list of operations.
+    First find inly executed operations.
+    Then creating list with all datatimes of operations.
+    And finaly, find operations with last five datatimes.
+    :return: dictionary with five last operations
+    '''
     operations = load_data()
     executed_operations = is_executed(operations)
     all_times = []
@@ -22,6 +33,11 @@ def last_five_operations():
     return result
 
 def is_executed(operations):
+    '''
+    Checking operations on having param EXECUTED
+    :param operations: list with all operations
+    :return: list with only executed operations
+    '''
     result = []
     for operation in operations:
         if 'state' in operation and operation['state'] == 'EXECUTED':
@@ -29,6 +45,11 @@ def is_executed(operations):
     return result
 
 def creat_message(operation):
+    '''
+    Creating message about operation
+    :param operation: operation
+    :return: text message
+    '''
     result = f'''{operation['date'][:10]} {operation['description']}
 {creat_from(operation)} -> {creat_to(operation)}
 {operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}
@@ -36,6 +57,11 @@ def creat_message(operation):
     return result
 
 def creat_from(operation):
+    '''
+    Transforming operatino['from'] in view "Maestro 7810 84** **** 5568"
+    :param operation: operation
+    :return: text like "Maestro 7810 84** **** 5568"
+    '''
     if 'from' not in operation:
         return ''
     card_list = operation['from'].split()
@@ -50,6 +76,11 @@ def creat_from(operation):
     return result
 
 def creat_to(operation):
+    '''
+    Transforming operatino['to'] in view "Счет **2869"
+    :param operation: operation
+    :return: text like "Счет **2869"
+    '''
     if 'to' not in operation:
         return ''
     card_list = operation['to'].split()
@@ -62,3 +93,4 @@ def creat_to(operation):
             number_account += item
     result += '**' + number_account[-4:]
     return result
+
