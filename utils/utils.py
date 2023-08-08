@@ -62,7 +62,7 @@ def creat_from(operation):
     :return: text like "Maestro 7810 84** **** 5568"
     '''
     if 'from' not in operation:
-        return ''
+        return 'Cash'
     card_list = operation['from'].split()
     result = ''
     number_account = ''
@@ -81,7 +81,7 @@ def creat_to(operation):
     :return: text like "Счет **2869"
     '''
     if 'to' not in operation:
-        return ''
+        return 'Cash'
     card_list = operation['to'].split()
     result = ''
     number_account = ''
