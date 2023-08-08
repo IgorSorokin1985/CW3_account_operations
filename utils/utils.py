@@ -96,7 +96,7 @@ def creat_to(operation):
 
 def datetime_operation(date):
     '''
-    Creat data format YYYY-MM-DD
+    Creat data format YYYY-MM-DD from income data
     :param date: data
     :return: text
     '''
