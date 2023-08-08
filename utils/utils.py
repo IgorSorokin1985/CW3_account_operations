@@ -1,4 +1,5 @@
 import json
+import datetime
 
 FILENAME = 'data/operations.json'
 NUMBER_LAST_OPERATIONS = 5
@@ -49,7 +50,7 @@ def creat_message(operation):
     :param operation: operation
     :return: text message
     '''
-    result = f'''{operation['date'][:10]} {operation['description']}
+    result = f'''{datetime_operation(operation['date'])} {operation['description']}
 {creat_from(operation)} -> {creat_to(operation)}
 {operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}
 '''
@@ -93,3 +94,11 @@ def creat_to(operation):
     result += '**' + number_account[-4:]
     return result
 
+def datetime_operation(date):
+    '''
+    Creat data format YYYY-MM-DD from income data
+    :param date: data
+    :return: text
+    '''
+    data_mod = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f')
+    return data_mod.date()
