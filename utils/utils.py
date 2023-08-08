@@ -56,17 +56,4 @@ def creat_to(operation):
         else:
             number_account += item
     result += '**' + number_account[-4:]
-
     return result
-
-def datetime_operation(date):
-    '''
-    Creat data format YYYY-MM-DD from income data
-    :param date: data
-    :return: text
-    '''
-    data_mod = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f')
-    return data_mod.date()
-
-    return result
-
