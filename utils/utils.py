@@ -72,7 +72,10 @@ def creat_from(operation):
             result += item + ' '
         else:
             number_account += item
-    result += number_account[:4] + ' ' + number_account[4:6] + '** **** ' + number_account[-4:]
+    if 'Счет' in operation['from']:
+        result += '**' + number_account[-4:]
+    else:
+        result += number_account[:4] + ' ' + number_account[4:6] + '** **** ' + number_account[-4:]
     return result
 
 def creat_to(operation):
